@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     sh 'docker rm -f flask-app || true'
-                    sh 'docker run -d --name flask-app -p 8080:8080 suyash-flask-app'
+                    sh 'docker run -d --name flask-app -p 9090:8080 suyash-flask-app'
                 }
             }
         }
