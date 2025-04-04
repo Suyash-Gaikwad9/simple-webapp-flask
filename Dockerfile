@@ -7,6 +7,8 @@ RUN pip3 install flask flask-mysql
 
 # Copy app into container
 COPY app.py /opt/
+COPY templates/ templates/
+
 
 # Set working directory
 WORKDIR /opt
