@@ -106,7 +106,7 @@ sudo tailscale funnel 8080
 
 
 
-6. 🔁 Setup GitHub Webhook (for CI/CD)
+### 6. 🔁 Setup GitHub Webhook (for CI/CD)
 Go to your GitHub repository.
 
 Navigate to Settings > Webhooks > Add Webhook.
@@ -123,7 +123,7 @@ Save the webhook.
 
 
 
-7. 🚀 Push Code Changes to Trigger Jenkins Job
+### 7. 🚀 Push Code Changes to Trigger Jenkins Job
 Make changes to your app code or Jenkinsfile.
 
 Push the changes to GitHub:
