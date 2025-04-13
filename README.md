@@ -1,43 +1,105 @@
-# Simple Web Application
+# 🛠️ Jenkins CI/CD Pipeline with Docker & Tailscale in a Self-Hosted Homelab
 
-This is a simple web application using [Python Flask](http://flask.pocoo.org/) and [MySQL](https://www.mysql.com/) database. 
-This is used in the demonstration of the development of Ansible Playbooks.
-  
-  Below are the steps required to get this working on a base linux system.
-  
-  - **Install all required dependencies**
-  - **Install and Configure Web Server**
-  - **Start Web Server**
-   
-## 1. Install all required dependencies
-  
-  Python and its dependencies
-  ```bash
-  apt-get install -y python3 python3-setuptools python3-dev build-essential python3-pip default-libmysqlclient-dev
-  ```
-   
-## 2. Install and Configure Web Server
+This project demonstrates a **production-style Jenkins CI/CD pipeline** running entirely on a **self-hosted Ubuntu server (homelab)**. It uses **Docker** to containerize Jenkins, and **Tailscale** to securely expose the Jenkins web interface using a temporary **zero-trust tunnel**, perfect for demos and on-demand access.
 
-Install Python Flask dependency
+---
+
+## 📌 Project Goals
+
+✅ Set up a local CI/CD pipeline using Jenkins inside Docker  
+✅ Manage Jenkins data using Docker volumes  
+✅ Securely access Jenkins from anywhere using Tailscale’s `funnel` feature  
+✅ Follow real-world DevOps workflows (build, test, deliver)  
+✅ Run this project entirely on a home server — no cloud services used!
+
+---
+
+## 🖥️ Architecture Overview
+
+
+[GitHub Repo] --> [Jenkins Pipeline in Docker] --> [Build Flask App Image] --> [Docker Container] --> [Test Deployment]
+                                                    ↓
+                                       [Volume for persistent Jenkins data]
+                                                    ↓
+                                    [Tailscale Funnel exposes port 8080 securely]
+
+🔧 Tech Stack
+Tool            	Purpose
+Jenkins	            CI/CD orchestration
+Docker	            Containerization of Jenkins & apps
+Tailscale	        Secure networking + public tunnel
+Ubuntu Server	    Self-hosted environment (homelab)
+Flask Web App	    Sample app to demonstrate CI/CD
+
+
+
+🚀 How It Works
+🐳 Jenkins is deployed inside Docker using a named volume for persistence.
+
+🛠️ A GitHub repo triggers a Jenkins job that builds a Flask app Docker image.
+
+🧪 Jenkins spins up the app container to validate the build.
+
+🌐 When needed, tailscale funnel 8080 is used to temporarily expose Jenkins for demos or remote usage.
+
+🔐 After usage, the tunnel is stopped to maintain privacy.
+
+
+
+📦 Setup Instructions
+📌 Assumes Docker, Docker Compose, and Tailscale are already installed.
+
+> ⚠️ Prerequisites:
+> - Ubuntu Server (or any Linux machine)
+> - Docker & Docker Compose installed
+> - Tailscale installed and authenticated
+
+---
+
+### 1. 🔁 Clone the Repository
+
 ```bash
-pip3 install flask
-pip3 install flask-mysql
+git clone https://github.com/yourusername/jenkins-cicd-homelab.git
+cd jenkins-cicd-homelab
 ```
 
-- Copy `app.py` or download it from a source repository
-- Configure database credentials and parameters 
+### 2. 🐳 Start Jenkins using Docker Compose
 
-## 3. Start Web Server
-
-Start web server
 ```bash
-FLASK_APP=app.py flask run --host=0.0.0.0
+docker-compose up -d
 ```
 
-## 4. Test
+### 3. 🔐 Unlock Jenkins & Install Plugins
+Visit Jenkins at: http://localhost:8080
 
-Open a browser and go to URL
+Get the initial admin password:
+
+```bash
+docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 ```
-http://<IP>:5000                            => Welcome
-http://<IP>:5000/how%20are%20you            => I am good, how about you?
+
+4. 📂 Create a Sample Jenkins Pipeline Job
+Use the simple-webapp-flask GitHub repo or your own app repo.
+
+Create a new Pipeline job.
+
+Choose "Pipeline script from SCM" and use your GitHub repo.
+
+Add a basic Jenkinsfile to your repo to build/test your app.
+
+
+5. 🌐 Expose Jenkins Securely (Tailscale Funnel)
+To share Jenkins publicly (e.g., for demos), run:
+
+```bash
+sudo tailscale funnel 8080
 ```
+
+6. ✅ Jenkins is Ready!
+You now have a fully working self-hosted Jenkins CI/CD pipeline that:
+
+✅ Runs in Docker
+
+✅ Uses persistent volumes
+
+✅ Is securely accessible from anywhere via Tailscale
