@@ -56,6 +56,8 @@ Flask Web App	    Sample app to demonstrate CI/CD
 
 ---
 
+
+
 ### 1. 🔁 Clone the Repository
 
 ```bash
@@ -63,11 +65,15 @@ git clone https://github.com/yourusername/jenkins-cicd-homelab.git
 cd jenkins-cicd-homelab
 ```
 
+
+
 ### 2. 🐳 Start Jenkins using Docker Compose
 
 ```bash
 docker-compose up -d
 ```
+
+
 
 ### 3. 🔐 Unlock Jenkins & Install Plugins
 Visit Jenkins at: http://localhost:8080
@@ -77,6 +83,8 @@ Get the initial admin password:
 ```bash
 docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 ```
+
+
 
 ### 4. 📂 Create a Sample Jenkins Pipeline Job
 Use the simple-webapp-flask GitHub repo or your own app repo.
@@ -88,6 +96,7 @@ Choose "Pipeline script from SCM" and use your GitHub repo.
 Add a basic Jenkinsfile to your repo to build/test your app.
 
 
+
 ### 5. 🌐 Expose Jenkins Securely (Tailscale Funnel)
 To share Jenkins publicly (e.g., for demos), run:
 
@@ -95,7 +104,41 @@ To share Jenkins publicly (e.g., for demos), run:
 sudo tailscale funnel 8080
 ```
 
-### 6. ✅ Jenkins is Ready!
+
+
+6. 🔁 Setup GitHub Webhook (for CI/CD)
+Go to your GitHub repository.
+
+Navigate to Settings > Webhooks > Add Webhook.
+
+Use the URL from your Tailscale funnel (e.g., https://suyash.ts.net/github-webhook/)
+
+Choose application/json as the content type.
+
+Set the trigger to Just the push event.
+
+Save the webhook.
+
+✅ Now whenever you push code to GitHub, Jenkins will automatically trigger a build!
+
+
+
+7. 🚀 Push Code Changes to Trigger Jenkins Job
+Make changes to your app code or Jenkinsfile.
+
+Push the changes to GitHub:
+
+```bash
+git add .
+git commit -m "Update app"
+git push
+```
+
+Watch the Jenkins console for your automated CI/CD pipeline in action!
+
+
+
+### 8. ✅ Jenkins is Ready!
 You now have a fully working self-hosted Jenkins CI/CD pipeline that:
 
 ✅ Runs in Docker
