@@ -78,7 +78,7 @@ Get the initial admin password:
 docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 ```
 
-4. 📂 Create a Sample Jenkins Pipeline Job
+### 4. 📂 Create a Sample Jenkins Pipeline Job
 Use the simple-webapp-flask GitHub repo or your own app repo.
 
 Create a new Pipeline job.
@@ -88,14 +88,14 @@ Choose "Pipeline script from SCM" and use your GitHub repo.
 Add a basic Jenkinsfile to your repo to build/test your app.
 
 
-5. 🌐 Expose Jenkins Securely (Tailscale Funnel)
+### 5. 🌐 Expose Jenkins Securely (Tailscale Funnel)
 To share Jenkins publicly (e.g., for demos), run:
 
 ```bash
 sudo tailscale funnel 8080
 ```
 
-6. ✅ Jenkins is Ready!
+### 6. ✅ Jenkins is Ready!
 You now have a fully working self-hosted Jenkins CI/CD pipeline that:
 
 ✅ Runs in Docker
