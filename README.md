@@ -45,6 +45,12 @@ Flask Web App	    Sample app to demonstrate CI/CD
 🔐 After usage, the tunnel is stopped to maintain privacy.
 
 
+---
+# 🖥️ Youtube Video for Project Demonstration
+https://youtu.be/SsZzlsFqhTM?si=I9RZoOOy5gIewklv
+---
+
+
 
 📦 Setup Instructions
 📌 Assumes Docker, Docker Compose, and Tailscale are already installed.
@@ -147,3 +153,6 @@ You now have a fully working self-hosted Jenkins CI/CD pipeline that:
 
 ✅ Is securely accessible from anywhere via Tailscale
 ---
+<img width="1470" alt="Screenshot 2025-04-12 at 10 56 22 PM" src="https://github.com/user-attachments/assets/dcb7bb99-c823-4fec-aa21-fbb398ef4c0f" />
+
+
